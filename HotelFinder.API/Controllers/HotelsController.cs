@@ -20,12 +20,21 @@ namespace HotelFinder.API.Controllers
         {
             _hotelService =hotelService;
         }
-
+        //swaggerda açıklama yapabilmek için
+        /// <summary>
+        /// Get All Hotels
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public List<Hotel> Get()
         {
             return _hotelService.GetAllHotels();
         }
+        /// <summary>
+        /// Get Hotel By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         [HttpGet("{id}")]
         public Hotel Get(int id)
@@ -34,6 +43,11 @@ namespace HotelFinder.API.Controllers
         }
 
         //create new hotel
+        /// <summary>
+        /// Create an Hotel
+        /// </summary>
+        /// <param name="hotel"></param>
+        /// <returns></returns>
         [HttpPost]
         public Hotel Post([FromBody]Hotel hotel)
         {
@@ -41,11 +55,21 @@ namespace HotelFinder.API.Controllers
         }
 
         //Güncelle
+        /// <summary>
+        /// Update the Hotel
+        /// </summary>
+        /// <param name="hotel"></param>
+        /// <returns></returns>
         [HttpPut]
         public Hotel Put([FromBody]Hotel hotel)
         {
             return _hotelService.UpdateHotel(hotel);
         }
+
+        /// <summary>
+        /// Delete the Hotel
+        /// </summary>
+        /// <param name="id"></param>
 
         [HttpDelete("{id}")]
         public void Delete(int id )
