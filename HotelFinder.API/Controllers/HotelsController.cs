@@ -33,14 +33,15 @@ namespace HotelFinder.API.Controllers
             var hotels= _hotelService.GetAllHotels();
             return Ok(hotels); //response 200 code ve body kısmında otelleri dön
         }
+        //-----------------------Action Overloading(Route ile belirt)
         /// <summary>
         /// Get Hotel By Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet]
+        [Route("[action]/{id}")]//api/hotels/gethotelbyid/2
+        public IActionResult GetHotelById(int id)
         {
             var hotel= _hotelService.GetHotelById(id);
             if(hotel!=null)
@@ -50,13 +51,36 @@ namespace HotelFinder.API.Controllers
             return NotFound();//404
         }
 
-        //create new hotel
+        [HttpGet]
+        //[Route("GetHotelByName/{name}")](action ismi aynı oldu değiştirdim)
+        [Route("[action]/{name}")]
+        public IActionResult GetHotelByName(string name)
+        {
+            var hotel = _hotelService.GetHotelByName(name);
+            if(hotel!=null)
+            {
+                return Ok(hotel);
+            }
+            return NotFound();           
+        }
+
+        //test with with 2 params
+        [HttpGet]
+        //[Route("[action]/{id}/{name}")]
+        //query string ile gönderebilirim-->api/hotels/gethotelbyidandname?id=3&name=titanic
+        [Route("[action]")]
+        public IActionResult GetHotelByIdAndName(int id, string name)
+        {
+            return Ok();
+        }
+
         /// <summary>
         /// Create an Hotel
         /// </summary>
         /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("[action]")] //or ("CreateHotel")
         public IActionResult Post([FromBody]Hotel hotel)
         {
             //Api controller kullanmasaydık böyle validation kontrol
@@ -72,14 +96,15 @@ namespace HotelFinder.API.Controllers
             return CreatedAtAction("Get", new { id = createdHotel.Id }, createdHotel);//201 + data 
         }
 
-        //Güncelle
+
         /// <summary>
         /// Update the Hotel
         /// </summary>
         /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put([FromBody]Hotel hotel)
+        [Route("[action]")]
+        public IActionResult UpdateHotel([FromBody]Hotel hotel)
         {
             if(_hotelService.GetHotelById(hotel.Id)!=null)
             {
@@ -93,8 +118,10 @@ namespace HotelFinder.API.Controllers
         /// </summary>
         /// <param name="id"></param>
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id )
+        //[HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public IActionResult DeleteHotel(int id )
         {
             if(_hotelService.GetHotelById(id)!=null)
             {
