@@ -10,7 +10,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HotelFinder.API.Controllers.HotelsController.Get(System.Int32)">
+        <member name="M:HotelFinder.API.Controllers.HotelsController.GetHotelById(System.Int32)">
             <summary>
             Get Hotel By Id
             </summary>
@@ -24,14 +24,14 @@
             <param name="hotel"></param>
             <returns></returns>
         </member>
-        <member name="M:HotelFinder.API.Controllers.HotelsController.Put(HotelFinder.Entities.Hotel)">
+        <member name="M:HotelFinder.API.Controllers.HotelsController.UpdateHotel(HotelFinder.Entities.Hotel)">
             <summary>
             Update the Hotel
             </summary>
             <param name="hotel"></param>
             <returns></returns>
         </member>
-        <member name="M:HotelFinder.API.Controllers.HotelsController.Delete(System.Int32)">
+        <member name="M:HotelFinder.API.Controllers.HotelsController.DeleteHotel(System.Int32)">
             <summary>
             Delete the Hotel
             </summary>
